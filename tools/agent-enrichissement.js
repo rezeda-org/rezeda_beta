@@ -62,8 +62,12 @@ async function selectionnerCandidats() {
 
   return (persos || [])
     .filter(p => !idsEnAttente.has(p.id)) // pas de doublon de proposition
-    // fiche incomplète : bio, métiers ou photo manquants (photo depuis v46)
-    .filter(p => !p.short_bio || !p.bio || !(p.metiers && p.metiers.length) || !p.photo_url)
+    // fiche incomplète : bio, métiers, photo (v46) ou documents en ligne
+    // (v48 : une fiche sans aucun lien ni vidéo est aussi à enrichir,
+    // c'est le cas des fiches du seed initial, complètes côté texte
+    // mais sans médias, sans sources et sans mention IA)
+    .filter(p => !p.short_bio || !p.bio || !(p.metiers && p.metiers.length)
+      || !p.photo_url || !(Array.isArray(p.liens) && p.liens.length))
     .slice(0, MAX_PERSONNES);
 }
 
