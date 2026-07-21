@@ -132,8 +132,8 @@ async function main() {
   test('Grilles de cases : colonnes souples minmax(0, 1fr), 2 colonnes max',
     grille && /repeat\(2,\s*minmax\(0,\s*1fr\)\)/.test(grille));
   console.log('\n=== V44 : onze modifications ===');
-  test('Onglet actif stylé via .active, couleur rose maquette (fiable Safari)',
-    /\._2-menu-bouton\.active\s*\{[^}]*background-color\s*:\s*var\(--sos-rose1/.test(cssSansComm));
+  test('Onglet actif stylé via .active, noir maquette v46 (fiable Safari)',
+    /\._2-menu-bouton\.active\s*\{[^}]*background-color\s*:\s*var\(--black-100/.test(cssSansComm));
   test('Bloc gouvernement : contour 3px et cotes maquette',
     /\.gov-compact-bloc\s*\{[^}]*border\s*:\s*3px solid/.test(cssSansComm));
   test('Conteneur des gouvernements sans retrait (padding/margin 0 !important)',
@@ -211,8 +211,10 @@ async function main() {
     !!btnListe && btnListe.classList.contains('_2-mini-bouton')
     && btnListe.textContent.includes('')
     && (btnListe.getAttribute('data-bulle') || '').includes('liste'));
-  test('Onglet actif des boutons picto stylé comme les onglets texte',
-    /\._2-mini-bouton\.people\.menu\.active\s*\{[^}]*background-color\s*:\s*var\(--sos-rose1/.test(cssSansComm));
+  test('Onglet actif des boutons picto stylé comme les onglets texte (noir v46)',
+    /\._2-mini-bouton\.people\.menu\.active\s*\{[^}]*background-color\s*:\s*var\(--black-100/.test(cssSansComm));
+  test('Footer : ._3-cont-foot est un enfant direct de la grille (plus rogné par ._3-cont-body)',
+    doc.querySelector('._3-cont-foot').parentElement.classList.contains('grid-layout'));
   const foot338 = doc.querySelector('.div-block-338');
   test('Footer : bloc div-block-338 avec Guide utilisateur / Faq / Médias (linkblack)',
     !!foot338 && !!doc.getElementById('openGuide') && !!doc.getElementById('openFaq')

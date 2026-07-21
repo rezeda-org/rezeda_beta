@@ -17,12 +17,15 @@
 
 /* ---- Onglet actif (v44) ----
    La maquette colore l'onglet via :focus, que Safari ne pose pas au clic.
-   On accroche le même style (rose maquette --sos-rose1) à la classe
-   .active que ui.js pose sur l'onglet courant : fiable partout. */
+   On accroche le même style que le :focus maquette à la classe
+   .active que ui.js pose sur l'onglet courant : fiable partout.
+   v46 : la maquette republiée est passée du rose au NOIR
+   (fond noir, texte blanc, bord 5px noir). */
 ._2-menu-bouton.active {
-  border: 5px solid var(--sos-rose1, #ffbbad) !important;
-  background-color: var(--sos-rose1, #ffbbad) !important;
+  border: 5px solid var(--black-100, #000) !important;
+  background-color: var(--black-100, #000) !important;
 }
+._2-menu-bouton.active h1 { color: var(--sos-white, #fff) !important; }
 
 /* ---- Menus du header (bascule JS, sans webflow.js) ---- */
 #menuCompte, #menuGeneral { flex-direction: column; }
@@ -630,13 +633,24 @@ body { scroll-padding-bottom: 50px; }
 
 /* Point 6 : boutons picto du menu (ajouter / liste des personnalités).
    Le petit « + » (combo .menu.mini) est en position:absolute dans la
-   maquette : on ancre son parent pour qu'il reste collé au bouton. */
-._2-mini-bouton.people.menu { position: relative; }
+   maquette : on ancre son parent pour qu'il reste collé au bouton.
+   Hauteur : le height:100% de la maquette retombe sur la hauteur du
+   contenu (barre sans hauteur fixe) ; on étire le bouton sur toute la
+   hauteur de la barre pour qu'il s'aligne sur les onglets texte, et
+   l'aspect-ratio maquette le garde carré. */
+._2-mini-bouton.people.menu {
+  position: relative;
+  width: 42px !important;
+  height: 42px !important;
+}
 ._2-picto-fontello-bouton.menu.mini { top: 0; right: 0; }
-/* Onglet actif, même convention que les onglets texte (v44) */
+/* Onglet actif : même convention noire que les onglets texte (v46) */
 ._2-mini-bouton.people.menu.active {
-  border: 5px solid var(--sos-rose1, #ffbbad) !important;
-  background-color: var(--sos-rose1, #ffbbad) !important;
+  border: 5px solid var(--black-100, #000) !important;
+  background-color: var(--black-100, #000) !important;
+}
+._2-mini-bouton.people.menu.active ._2-picto-fontello-bouton {
+  color: var(--sos-white, #fff) !important;
 }
 
 /* Point 4 : fiche personnalité, photo dans le carré .image-fiche */
