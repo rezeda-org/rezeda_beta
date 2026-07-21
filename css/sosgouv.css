@@ -1,0 +1,705 @@
+/* ============================================================
+   SOSGOUV, CSS applicatif de la version design.
+   Le graphisme vient du CSS Webflow publié (5310d7a46).
+   Ici : mécanique (menus, modaux, toasts, autocomplete) et
+   compléments pour les contenus générés en JS.
+   ============================================================ */
+
+/* Les pictos Fontello de la maquette utilisent des glyphes privés
+   que nous ne connaissons pas : nos icônes unicode reprennent leur
+   place avec une police standard. */
+.ico {
+  font-family: Arial, "Segoe UI Emoji", sans-serif !important;
+  font-size: 12px;
+  line-height: 1;
+}
+.croix { cursor: pointer; }
+
+/* ---- Onglet actif (v44) ----
+   La maquette colore l'onglet via :focus, que Safari ne pose pas au clic.
+   On accroche le même style (rose maquette --sos-rose1) à la classe
+   .active que ui.js pose sur l'onglet courant : fiable partout. */
+._2-menu-bouton.active {
+  border: 5px solid var(--sos-rose1, #ffbbad) !important;
+  background-color: var(--sos-rose1, #ffbbad) !important;
+}
+
+/* ---- Menus du header (bascule JS, sans webflow.js) ---- */
+#menuCompte, #menuGeneral { flex-direction: column; }
+.menu-link-off { opacity: 0.35; pointer-events: none; }
+
+/* ---- Modaux (v38) : mécanique entièrement autonome ----
+   Le CSS Webflow est resynchronisé automatiquement à chaque republication
+   de la maquette (le hash change, une action GitHub met à jour index.html
+   chaque nuit) : la mécanique des modaux (position, centrage, voile sombre,
+   empilement, croix) ne doit donc dépendre d'AUCUNE règle de la maquette,
+   ni de la place des modaux dans le DOM (ils sont déplacés sous <body> au
+   chargement, voir ui.js). D'où les !important systématiques ci-dessous :
+   ils neutralisent aussi les combo-classes Webflow plus spécifiques
+   (.pm-parent.connect, .bm-parent.gu, …). Seule l'esthétique intérieure
+   (paddings, typo, contenus) reste pilotée par la maquette. */
+/* Deux mises en page distinctes, conformes à la maquette (v43) :
+   - pm (petits modaux) : calque FIXE plein écran sous <body>, boîte
+     centrée (horizontalement ET verticalement), voile noir à 70 % comme
+     le fond-modal de la maquette, croix blanche sur carré noir au coin
+     haut-droit de la boîte.
+   - bm (grands modaux) : PANNEAU DANS LA PAGE, pas un calque. Le site est
+     une grille centrée (max 860 px, header 80 px / contenu / footer) ;
+     le bm reste dans ._3-cont-body, affiché en bloc il occupe toute la
+     case de contenu et pousse le menu d'onglets et les sections hors de
+     la zone visible (rognées par l'overflow hidden du conteneur). Il a
+     donc naturellement la largeur du contenu, cache les onglets, descend
+     jusqu'au footer, fond blanc sans voile, croix maquette en haut à
+     GAUCHE. Ne JAMAIS re-sortir les bm de ._3-cont-body. */
+.pm-parent {
+  position: fixed !important;
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+  z-index: 4100 !important;
+  display: none;
+  flex-flow: row nowrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  overflow-y: auto !important;
+  padding: 12px !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+.bm-parent {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 50;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  display: none;
+  background: var(--sos-white, #fff);
+  overflow: auto !important;
+}
+/* Le voile des pm est porté par le conteneur plein écran ci-dessus, les
+   bm n'en ont pas : les fonds intégrés de la maquette n'ont plus à
+   s'afficher (le clic hors de la boîte ferme le modal, géré dans ui.js). */
+.pm-parent ._3-fond-modal { display: none !important; }
+#fondModal { position: fixed; inset: 0; z-index: 4000; background: rgba(0,0,0,0.7); }
+/* La boîte : un simple bloc, jamais un flex 50/50. Pour les bm, elle
+   remplit le panneau (le 500 px de la maquette ne vaut que pour les pm). */
+.pm-parent .cont-flex-50-50, .bm-parent .cont-flex-50-50 {
+  display: block !important;
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  flex: none !important;
+  margin: 0 auto !important;
+}
+.pm-parent .cont-flex-50-50 { width: min(94vw, 500px) !important; height: auto !important; max-height: none !important; }
+.bm-parent .cont-flex-50-50 {
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  max-height: none !important;
+}
+/* Le stroke de la maquette remplit le panneau et défile à l'intérieur */
+.bm-parent ._3-big-modal-stroke {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  box-sizing: border-box !important;
+  overflow-y: auto !important;
+}
+/* Croix de fermeture (la position ne dépend plus de la maquette). */
+.pm-parent ._3-close-bouton, .bm-parent ._3-close-bouton {
+  position: absolute !important;
+  bottom: auto !important;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 34px;
+  cursor: pointer;
+}
+/* pm : le contenu ne défile jamais horizontalement */
+.pm-parent ._3-small-modal-stroke { overflow-x: hidden !important; }
+/* pm : croix blanche sur carré noir, sans contour, collée au coin
+   haut-droit de la boîte */
+.pm-parent ._3-close-bouton {
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+  background: var(--black-100, #000) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.pm-parent ._3-close-bouton .croix, .pm-parent ._3-close-bouton div {
+  color: #fff !important;
+}
+/* bm : croix de la maquette, en haut à gauche du panneau */
+.bm-parent ._3-close-bouton {
+  top: 0 !important;
+  left: 0 !important;
+  right: auto !important;
+}
+/* v37 : le padding vient de la maquette Webflow (40px 20px 20px, place pour
+   le bouton de fermeture), on ne le force plus ici. On garde seulement les
+   compléments fonctionnels que la maquette ne définit pas. */
+._3-small-modal-stroke, ._3-big-modal-stroke { background: var(--sos-white, #fff); border: 5px solid var(--black-100, #000); max-height: 82vh; overflow-y: auto; }
+
+/* ---- Toast ---- */
+.toast, #sosgouv-toast {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--black-100, #000);
+  color: #fff;
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  z-index: 5000; /* au-dessus des modaux (4100) */
+  max-width: 90vw;
+}
+
+/* ---- Etats ---- */
+.loading, .empty-msg, .esp-vide, .adm-lien-vide { color: var(--sos-grey-1, #aca69a); font-style: italic; padding: 8px 0; font-size: 12px; }
+.error-msg { color: var(--red, #b81515); padding: 8px 0; }
+
+/* ---- Liste des personnalités ---- */
+.groupe-lettre { color: var(--black-100, #000); text-transform: uppercase; font-weight: 900; margin: 14px 0 4px; }
+.badge-statut { text-transform: uppercase; font-weight: 900; font-size: 11px; }
+.statut-ok { color: var(--sos-green, #5ac6b1); }
+.statut-jamais { color: var(--sos-new-grey, #897f78); }
+.statut-cond { color: var(--red, #b81515); }
+.statut-neant { color: var(--sos-grey-1, #aca69a); }
+.like-bloc { text-decoration: none; }
+.btn-like.active .ico { color: var(--red, #b81515); }
+.btn-pin.active .ico, .btn-gouv-pin.active .ico { color: var(--sos-yellow, #ffbb47); }
+
+/* ---- Cartes gouvernement ---- */
+.badge-pret { color: var(--sos-green, #5ac6b1); text-transform: uppercase; font-weight: 900; font-size: 11px; white-space: nowrap; }
+.note-moy { }
+.etoile { cursor: pointer; color: var(--sos-grey-1, #aca69a); font-size: 18px; background: none; border: none; padding: 0 1px; font-family: Arial, sans-serif; }
+.etoile.pleine, .etoile:hover { color: var(--sos-yellow, #ffbb47); }
+.gov-card-boutons { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; padding: 6px 0 12px; }
+.gouv-desc { margin: 6px 0; }
+
+/* ---- Détail gouvernement ---- */
+.detail-poste { display: flex; gap: 8px; margin-bottom: 4px; font-size: 12px; }
+.dp-intitule { color: var(--sos-grey-1, #aca69a); }
+.dp-perso { font-weight: 700; }
+.comm-add-row { display: flex; gap: 6px; margin-top: 10px; align-items: center; }
+.comm-add-row input { flex: 1; }
+.comm-item { border-bottom: 0.5px dashed var(--sos-grey-1, #aca69a); padding: 6px 0; font-size: 12px; }
+.comm-auteur { color: var(--sos-link2, #c2815c); font-weight: 700; }
+.cr-e-par { margin: 4px 0 8px; }
+
+/* ---- Composer ---- */
+/* v44 : le trait noir vertical n'est plus continu sur tout le conteneur,
+   chaque groupe de postes (régaliens, puis ministères/délégués) porte son
+   propre segment, interrompu autour du séparateur « Ministères par
+   défaut ». */
+._3-bloc-minsteres { border-left: none !important; }
+.compo-groupe {
+  border-left: 3px solid var(--black-100, #000);
+  display: flex;
+  flex-flow: column;
+  grid-row-gap: 20px;
+  gap: 20px;
+}
+.poste-perso-row { position: relative; }
+._3-gov-line-1 { display: flex; align-items: center; gap: 6px; }
+._3-gov-line-1 .poste-perso-search { flex: 1; }
+.autocomplete-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--sos-white, #fff);
+  border: 1px solid var(--black-100, #000);
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 900;
+}
+.autocomplete-item { padding: 4px 8px; cursor: pointer; font-size: 12px; }
+.autocomplete-item:hover { background: var(--light-grey, #e7e7e7); }
+.ac-metier { color: var(--sos-grey-1, #aca69a); font-style: italic; font-size: 10px; }
+.poste-intitule-verrou { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.poste-secteur-select, .poste-fusion-select { border: 1px solid var(--sos-grey-1, #aca69a); background: var(--sos-white, #fff); font-size: 12px; padding: 4px 8px; }
+.poste-secteur-select.placeholder, .poste-fusion-select.placeholder { color: var(--sos-grey-1, #aca69a); }
+.fusion-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--light-grey, #e7e7e7); border-radius: 5px; padding: 2px 8px; font-size: 10px; }
+.btn-icone { background: none; border: none; cursor: pointer; padding: 0 2px; font-size: 13px; }
+.btn-fusion-del, .adm-lien-del { color: var(--red, #b81515); }
+.composer-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.bloc-v-gap10 { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+
+/* ---- Fiche personnalité ---- */
+.descript-photo-bio { display: flex; gap: 15px; margin-bottom: 12px; }
+.image-perso-placeholder { width: 100px; height: 100px; background: var(--sos-grey-1, #aca69a); flex: none; }
+.block-infos-fiche { display: flex; flex-direction: column; gap: 4px; }
+.grid-video { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 600px) { .grid-video { grid-template-columns: 1fr; } }
+.fiche-video iframe { width: 100%; aspect-ratio: 16 / 9; border: none; }
+.fiche-video-titre { font-size: 10px; color: var(--sos-grey-1, #aca69a); margin-top: 2px; }
+.fiche-lien { color: var(--sos-link2, #c2815c); text-decoration: underline; font-size: 12px; display: flex; }
+.fiche-proposition { font-size: 12px; padding: 2px 0; }
+.fp-gouv { font-weight: 700; }
+.fiche-sous-titre { color: var(--sos-new-grey, #897f78); text-transform: uppercase; font-size: 12px; margin: 14px 0 4px; }
+
+/* ---- Espace personnel ---- */
+.div-activit { margin-top: 20px; border-top: 0.5px dashed var(--black-100, #000); padding-top: 12px; }
+.esp-bloc { margin-bottom: 12px; }
+.esp-liste { display: flex; flex-direction: column; gap: 3px; }
+.esp-item { color: var(--sos-link2, #c2815c); text-decoration: underline; font-size: 12px; display: flex; }
+.esp-note { color: var(--sos-yellow, #ffbb47); }
+.esp-comm { font-size: 12px; background: var(--light-grey, #e7e7e7); padding: 4px 8px; border-radius: 5px; }
+.esp-comm-cible { color: var(--sos-grey-1, #aca69a); font-style: italic; }
+._3-form-gap-10 { display: flex; flex-direction: column; gap: 10px; }
+
+/* ---- Editeur admin ---- */
+.adm-liens-bloc { margin: 12px 0; border-top: 0.5px dashed var(--black-100, #000); padding-top: 10px; }
+.adm-lien-item { display: flex; align-items: center; gap: 6px; padding: 3px 0; font-size: 12px; }
+.adm-lien-titre { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.adm-liens-form { display: flex; flex-direction: column; gap: 5px; }
+
+/* ---- Footer ---- */
+.version-switch { display: block; text-align: center; font-size: 10px; color: var(--sos-grey-1, #aca69a); text-decoration: underline; padding: 6px 0; }
+.admine-part { background: var(--sos-yellow, #ffbb47); }
+
+/* ---- Carte gouvernement, maquette de juillet ---- */
+.govlinedetails { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.bouton-gov-detail { display: flex; gap: 6px; margin-left: auto; }
+.radio-button-form { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.div-block-323.gouv-vote { display: flex; gap: 4px; }
+.radio-button-3.etoile {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 1.5px solid var(--black-100, #000);
+  background: var(--sos-white, #fff);
+  display: inline-block; cursor: pointer; padding: 0; font-size: 0;
+}
+.radio-button-3.etoile.pleine, .radio-button-3.etoile:hover { background: var(--sos-yellow, #ffbb47); }
+.mini-jaune { color: var(--sos-yellow, #ffbb47); font-size: 10px; }
+.cr-e-par { display: flex; gap: 5px; align-items: center; margin: 4px 0 8px; }
+.gouv-membres .gouv-membre { display: flex; gap: 6px; align-items: baseline; }
+.gouv-membres .gm-secteur { color: var(--sos-grey-1, #aca69a); }
+.filet.pointille { border-bottom: 1px dotted var(--black-100, #000); margin: 8px 0; }
+
+
+/* ---- Bloc gouvernement : contour noir individuel ----
+   v44 : mêmes cotes que le ._3-gov-content de la maquette
+   (contour 3px, padding 15/20, 10px entre les blocs). */
+.gov-compact-bloc {
+  border: 3px solid var(--black-100, #000);
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  background: var(--sos-white, #fff);
+}
+._3-gov-content { display: flex; flex-direction: column; }
+
+/* ---- Correctifs v15 (revus v44) ---- */
+/* Le conteneur des gouvernements ne porte ni contour ni retrait : chaque
+   bloc trace le sien, aligné à gauche sur le bord de la section comme
+   dans la maquette. */
+#section-1 { border: none !important; }
+#section-1 ._3-gov-content {
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+
+/* Bouton détails : libellé visible dans son cadre */
+.btn-gouv-detail { border: 2px solid var(--black-100, #000); border-radius: 6px; padding: 3px 10px; }
+.btn-gouv-detail h6, .btn-gouv-detail .heading-dyn { display: block !important; margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+
+/* Pictos SVG (corbeille, crayon) alignés sur les pictos fontello */
+.picto-svg { display: flex; align-items: center; justify-content: center; }
+.picto-svg svg { display: block; }
+
+/* Modal détail : mise en page maquette */
+.detail-titre { color: var(--sos-yellow, #ffbb47); text-transform: uppercase; font-size: 18px; font-weight: 900; margin: 0 0 4px; }
+.detail-vote { display: flex; gap: 4px; margin-bottom: 8px; }
+.detail-etoile { width: auto; height: auto; border: none !important; border-radius: 0; background: none !important; font-size: 22px; line-height: 1; color: var(--light-grey, #e7e7e7); font-family: Arial, sans-serif; padding: 0; }
+.detail-etoile.pleine, .detail-etoile:hover { color: var(--sos-yellow, #ffbb47) !important; background: none !important; }
+.detail-desc { margin: 6px 0 10px; }
+#detail-contenu h4 { margin: 14px 0 4px; }
+.btn-envoyer-comm { flex: none; }
+
+
+/* ---- v16 : étoile-note SVG, détail, fiche ---- */
+.note-star-bloc { flex: none; margin-left: 6px; line-height: 0; }
+.note-star { display: block; }
+
+.detail-etoile { font-size: 20px; line-height: 1; color: var(--sos-yellow, #ffbb47); background: none !important; border: none !important; width: auto; height: auto; border-radius: 0; padding: 0; cursor: pointer; }
+.detail-etoile:not(.pleine) { opacity: 0.9; }
+
+/* Fiche personnalité */
+.fiche-entete { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.fiche-nom { color: var(--sos-yellow, #ffbb47); text-transform: uppercase; font-weight: 900; font-size: 18px; margin: 0; }
+.fiche-metier-grey { color: var(--sos-grey-1, #aca69a); text-transform: uppercase; font-size: 14px; }
+.fiche-h { color: var(--black-100, #000); text-transform: uppercase; font-weight: 900; font-size: 13px; margin: 12px 0 4px; }
+.fiche-para { margin: 0 0 8px; }
+.fiche-filet { border-top: 1px solid var(--black-100, #000); margin: 14px 0 10px; }
+.fiche-proposition { text-transform: uppercase; font-size: 12px; padding: 2px 0; }
+.fp-poste { font-weight: 700; }
+.fp-par { text-transform: none; }
+.fp-user { color: var(--sos-yellow, #ffbb47); text-decoration: underline; font-weight: 700; }
+.fp-gouv { color: var(--sos-grey-1, #aca69a); text-transform: none; }
+.fiche-lien { color: var(--sos-yellow, #ffbb47); }
+
+/* ---- v17 (affiné en v37) : modaux, admin, commentaires, dropdowns ---- */
+/* Le contenu des modaux repris de la maquette doit toujours être visible.
+   v37 : on garantit seulement l'opacité ; le display n'est plus forcé sur
+   ._3-petit-modal-content, dont la maquette définit un flex colonne centré
+   (le block !important de la v17 écrasait cette mise en page dans les popups,
+   d'où un rendu différent de la section 3 pleine page qui utilise la même
+   classe hors .pm-parent). */
+.pm-parent ._3-small-modal-stroke, .pm-parent ._w-connect-bloc,
+.bm-parent ._3-big-modal-stroke {
+  display: block !important;
+  opacity: 1 !important;
+}
+.pm-parent ._3-petit-modal-content {
+  opacity: 1 !important;
+}
+.pm-parent .w-form-done, .pm-parent .w-form-fail { display: none !important; }
+
+/* Admin membres */
+.admin-membre-ligne { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 0.5px dashed var(--sos-grey-1, #aca69a); font-size: 12px; }
+.am-user { font-weight: 900; text-transform: uppercase; }
+.am-badge { color: var(--sos-yellow, #ffbb47); font-size: 10px; }
+.am-infos { color: var(--sos-grey-1, #aca69a); flex: 1; }
+.am-moi { color: var(--sos-grey-1, #aca69a); font-style: italic; font-size: 10px; }
+
+/* Admin secteurs */
+.admin-secteur-bloc { padding: 8px 0; border-bottom: 0.5px dashed var(--sos-grey-1, #aca69a); }
+.as-type { color: var(--sos-grey-1, #aca69a); font-weight: 400; text-transform: none; font-size: 11px; }
+.as-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 5px 0; }
+.as-form { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.as-select { border: 1px solid var(--sos-grey-1, #aca69a); font-size: 12px; padding: 4px 8px; background: #fff; }
+.as-new { flex: 1; min-width: 180px; }
+
+/* Réponses aux commentaires */
+.comm-reponse { margin-left: 24px; border-left: 2px solid var(--light-grey, #e7e7e7); padding-left: 10px; }
+.comm-repondre { color: var(--sos-grey-1, #aca69a); font-size: 10px; text-decoration: underline; margin-left: 6px; }
+.comm-reponse-form { display: flex; gap: 6px; margin-top: 4px; align-items: center; }
+.comm-reponse-form input { flex: 1; }
+
+/* Dropdowns harmonisés (liste des personnalités) */
+.drops-perso { display: flex; gap: 12px; align-items: center; }
+._2-drops-down-new { position: relative; }
+.dropdown-list-4 { display: none; position: absolute; top: 100%; left: 0; min-width: 190px; background: var(--sos-white, #fff); border: 1px solid var(--black-100, #000); z-index: 950; }
+.dropdown-list-4.w--open { display: block; }
+._w-dropdown-copy { cursor: pointer; display: flex; align-items: center; gap: 6px; }
+
+
+/* ---- v23 : les petits modaux utilisent leur fond intégré (CSS Webflow) ---- */
+.bm-parent ._3-fond-modal { display: none !important; }
+
+/* ---- Footer admin : espacement des liens ---- */
+.admine-part { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.admine-part .link-admin { white-space: nowrap; }
+
+/* ---- Footer admin : autonome, insensible au CSS Webflow ---- */
+._3-cont-foot {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+}
+#adminFooter.admine-part {
+  background: var(--sos-yellow, #ffbb47) !important;
+  padding: 10px 16px !important;
+  margin: 0 !important;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 2000 !important;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+}
+/* Laisser la place à la barre en bas de page pour les admins */
+body { scroll-padding-bottom: 50px; }
+#adminFooter .link-admin {
+  color: var(--black-100, #000) !important;
+  font-weight: 700;
+  text-decoration: underline;
+  display: inline !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-size: 12px;
+}
+
+/* ---- v22 : maquette de juillet (composer, modaux, liste) ---- */
+/* Liste des personnalités : noms en jaune, statuts colorés */
+#liste-personnalites .heading-4-nom-prenom { color: var(--sos-yellow, #ffbb47); }
+#liste-personnalites .heading-4-nom-prenom.grey { color: var(--sos-grey-1, #aca69a); }
+.fontello-statut._0, .fontello-statut._1 { color: var(--black-100, #000); }
+.fontello-statut._2 { color: var(--sos-yellow, #ffbb47); }
+.fontello-statut._3 { color: var(--sos-green, #5ac6b1); }
+
+/* Composer : descriptions de section + boutons addpink */
+.compo-section-desc { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 22px 0; text-align: center; }
+.compo-desc-txt { max-width: 560px; text-transform: uppercase; font-size: 11px; }
+._w-link-bloc-button.addpink { background: var(--sos-link2, #c2815c); }
+._w-link-bloc-button.addpink .heading-bold-text.white, ._w-link-bloc-button.addpink ._2-picto-fontello-bouton.white { color: #fff; }
+
+/* Blocs de poste : croix rose de suppression */
+._2-picto-fontello-bouton.x { cursor: pointer; }
+.fontello-icon.pink { color: var(--red, #b81515); }
+._3-gov-line-0 { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.poste-intitule.heading-23 { font-weight: 900; text-transform: uppercase; border: none; background: transparent; padding: 0; font-size: inherit; width: auto; min-width: 220px; flex: 1; }
+.heading-23._2 { color: var(--sos-grey-1, #aca69a); }
+
+/* Modaux PM : grille de checkboxes et liste des personnalités.
+   v42 : jamais d'ascenseur horizontal. Deux colonnes souples (minmax(0,1fr)
+   les autorise à rétrécir), libellés qui reviennent à la ligne, une seule
+   colonne sur mobile. */
+.grid-collection-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 14px; }
+.grid-collection-list .w-checkbox, .grid-collection-list .w-form-label { white-space: normal; overflow-wrap: break-word; }
+@media (max-width: 600px) { .grid-collection-list { grid-template-columns: minmax(0, 1fr); } }
+.bloc-gris-2 { background: var(--light-grey, #e7e7e7); padding: 10px 12px; margin: 8px 0; }
+.mlp-liste { max-height: 55vh; overflow-y: auto; margin-top: 10px; }
+.mlp-lettre { color: var(--sos-yellow, #ffbb47); font-weight: 900; text-transform: uppercase; margin: 10px 0 3px; }
+.div-block-296 { display: flex; gap: 6px; align-items: baseline; padding: 1px 0; cursor: pointer; }
+.div-block-296:hover { background: var(--light-grey, #e7e7e7); }
+.div-block-296 .grey-courant { color: var(--sos-grey-1, #aca69a); }
+#mapOptions { display: none; flex-direction: column; gap: 10px; }
+.pm-lien-options, #mapPlus { color: var(--sos-link2, #c2815c); text-decoration: underline; font-size: 12px; }
+
+
+/* ---- v23 : composer maquette de juillet ---- */
+/* Nom du gouvernement : jaune une fois rempli ; nom du ministre : noir une fois rempli */
+#gouvTitre:not(:placeholder-shown) { color: var(--sos-yellow, #ffbb47) !important; }
+.poste-perso-search:not(:placeholder-shown) { color: var(--black-100, #000) !important; }
+
+/* Séparateur "Ministères par defaut" : centré (v44) */
+.compo-sep { margin: 26px auto 12px; text-align: center; }
+.compo-sep .heading-10 { margin-left: auto; margin-right: auto; }
+.compo-sep .code-7 { text-transform: uppercase; font-size: 10px; color: var(--sos-grey-1, #aca69a); background: none; font-family: inherit; }
+
+/* Lignes de liens du modal ajouter une personnalité */
+.div-block-332 { display: flex; gap: 6px; align-items: center; }
+.div-block-332 input { flex: 1; }
+._w-link-bloc-button-square { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; background: var(--sos-green, #5ac6b1); flex: none; }
+
+/* v46 : menu utilisateur du footer (Guide utilisateur / Faq / Médias),
+   dans le flux du footer comme la maquette (div-block-338), plus de
+   pastille fixe en bas à droite. */
+.foot-public-liens {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding-top: 5px;
+}
+
+/* ---- v25 : activité, données perso, détail v2 ---- */
+/* Votation directe dans "Mes votes" */
+.esp-votation { display: inline-flex; gap: 3px; align-items: center; }
+.esp-etoile { cursor: pointer; font-size: 15px; color: var(--sos-grey-1, #aca69a); }
+.esp-etoile.pleine { color: var(--sos-yellow, #ffbb47); }
+.div-block-334 { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.div-block-331 { padding: 4px 0; }
+.div-block-331 .text-block-75 a { color: inherit; text-decoration: none; }
+.div-block-331 .text-block-75 a:hover { text-decoration: underline; }
+
+/* Détail v2 */
+.vote-bloc-detail { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.gov-compact-bloc.detail2 { border: none; }
+.detail2 .bouton-gov-detail { display: flex; gap: 10px; margin: 8px 0; }
+.detail2 .non-attribue { color: var(--sos-grey-1, #aca69a); }
+
+/* ---- v27 : validation des propositions de l'agent IA ---- */
+.badge-compteur { display: inline-block; background: var(--red, #b81515); color: #fff; border-radius: 10px; padding: 0 6px; font-size: 11px; margin-left: 4px; }
+.prop-bloc { border: 1px solid var(--black-100, #000); padding: 12px; margin-bottom: 14px; }
+.prop-champ { margin: 8px 0; }
+.prop-label { font-weight: 900; text-transform: uppercase; font-size: 11px; color: var(--sos-grey-1, #aca69a); }
+.prop-avant { opacity: 0.55; text-decoration: line-through; font-size: 13px; }
+.prop-apres { color: var(--sos-green, #5ac6b1); font-size: 13px; }
+.prop-lien { font-size: 12px; }
+.prop-sources { font-size: 11px; margin-top: 6px; opacity: 0.7; }
+.prop-source { margin-right: 6px; }
+.prop-actions { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
+
+/* ---- v28 : propositions IA éditables, prévisualisation façon fiche ---- */
+.prop-champ textarea, .prop-champ input.mon-input5 { width: 100%; box-sizing: border-box; }
+.prop-champ textarea { overflow: hidden; resize: none; field-sizing: content; /* auto-hauteur native (Chrome/Edge), en plus de l'ajustement JS */ }
+.prop-hint { font-size: 11px; opacity: 0.6; margin-bottom: 3px; }
+.prop-lien-row { display: flex; gap: 6px; align-items: center; margin-bottom: 6px; }
+.prop-lien-row select { flex: none; width: 70px; }
+.prop-lien-row .prop-lien-titre { flex: 1; min-width: 0; }
+.prop-lien-row .prop-lien-url { flex: 2; min-width: 0; }
+.prop-lien-del { flex: none; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; background: var(--black-100, #000); color: #fff; font-family: Fontello; font-size: 11px; cursor: pointer; }
+.prop-lien-add { font-size: 12px; color: var(--sos-link2, #c2815c); text-decoration: underline; display: inline-block; margin-top: 2px; }
+
+/* ---- v31 : description tronquée sur la carte publiée, délégués stylés ---- */
+.paragraph-7.gouv-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.paragraph-7.gouv-desc.expanded {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+.btn-desc-toggle { cursor: pointer; }
+
+/* Détail (gouv-detail-2) : même principe pour les délégués, classes propres à ce contexte */
+.bloc-poste-gov-detail.delegue-bloc { margin-left: 12px; }
+.bloc-poste-gov-detail.delegue-bloc .nom-prenom-gov-detail,
+.bloc-poste-gov-detail.delegue-bloc .h1-color { font-size: 0.85em; }
+.bloc-poste-gov-detail.delegue-bloc .fleche-fontello { color: var(--sos-new-grey, #aca69a); padding-right: 5px; font-family: Fontello, Arial, sans-serif; }
+
+
+/* ---- v44 : infobulles stylées au survol des pictogrammes ---- */
+#sos-bulle {
+  position: fixed;
+  z-index: 6500;
+  background: var(--black-100, #000);
+  color: #fff;
+  font-size: 11px;
+  line-height: 1.3;
+  padding: 4px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s;
+  max-width: 260px;
+  text-align: center;
+}
+#sos-bulle.visible { opacity: 1; }
+
+/* ---- v44 : choix du brouillon et du poste (liste des personnalités) ---- */
+#brouillon-pop {
+  position: fixed;
+  z-index: 6000;
+  background: var(--sos-white, #fff);
+  border: 3px solid var(--black-100, #000);
+  min-width: 240px;
+  max-width: 340px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+#brouillon-pop .bp-titre { font-weight: 900; text-transform: uppercase; font-size: 11px; padding: 8px 12px 4px; }
+#brouillon-pop .bp-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: var(--black-100, #000);
+  text-decoration: none;
+}
+#brouillon-pop .bp-item:hover { background: var(--light-grey, #e7e7e7); }
+#brouillon-pop .bp-occupant { color: var(--sos-grey-1, #aca69a); font-style: italic; white-space: nowrap; }
+
+/* ---- v44 : étiquettes flottantes (données personnelles) ---- */
+.champ-etiquette {
+  display: none;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--sos-grey-1, #aca69a);
+  margin: 6px 0 2px;
+}
+.champ-etiquette.visible { display: block; }
+
+/* ==================== v46 ==================== */
+
+/* Point 3 : gouvernement détail, noms et prénoms en majuscules
+   (la maquette n'applique pas de text-transform sur cette classe,
+   on l'impose ici conformément à la demande). */
+.nom-prenom-gov-detail { text-transform: uppercase; }
+
+/* Point 6 : boutons picto du menu (ajouter / liste des personnalités).
+   Le petit « + » (combo .menu.mini) est en position:absolute dans la
+   maquette : on ancre son parent pour qu'il reste collé au bouton. */
+._2-mini-bouton.people.menu { position: relative; }
+._2-picto-fontello-bouton.menu.mini { top: 0; right: 0; }
+/* Onglet actif, même convention que les onglets texte (v44) */
+._2-mini-bouton.people.menu.active {
+  border: 5px solid var(--sos-rose1, #ffbbad) !important;
+  background-color: var(--sos-rose1, #ffbbad) !important;
+}
+
+/* Point 4 : fiche personnalité, photo dans le carré .image-fiche */
+.image-fiche img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Les boutons d'action de la fiche restent sur une ligne compacte */
+#fiche-contenu .boutons-perso-group { display: flex; align-items: center; gap: 5px; }
+#fiche-contenu .fiche-statut { white-space: nowrap; }
+#fiche-contenu .fiche-statut > div { white-space: nowrap; }
+#fiche-contenu .div-block-339 { flex-wrap: wrap; gap: 5px; }
+#fiche-contenu .bloc-video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
+#fiche-contenu .bloc-links, #fiche-contenu .div-block-340 { display: flex; flex-direction: column; gap: 4px; }
+#fiche-contenu .div-block-340 a.liensimple { word-break: break-all; }
+
+/* Point 1 : page médias (toutes les vidéos des fiches) */
+#medias-contenu.bloc-video { margin-top: 10px; }
+#medias-contenu iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
+#medias-contenu .legendesimple a { color: inherit; text-decoration: underline; }
+
+/* Point 1 : FAQ, accordéon questions/réponses */
+#modal-faq .q-r-bloc .question h3 { margin: 0; }
+#modal-faq .q-r-bloc { cursor: pointer; }
+#modal-faq .reponses { padding: 4px 0 8px; }
+#modal-faq ._3-form-gap-10 { display: flex; flex-direction: column; gap: 7px; margin-bottom: 15px; }
+
+/* Point 2 : guide utilisateur, lignes fonction = picto + explication */
+.gu-ligne { display: flex; align-items: baseline; gap: 10px; margin: 4px 0; }
+.gu-icone {
+  font-family: Fontello, Arial, sans-serif;
+  flex: none;
+  min-width: 58px;
+  text-align: center;
+  font-size: 14px;
+  border: 2px solid var(--black-100, #000);
+  border-radius: 5px;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+.gu-icone.gu-lien {
+  font-family: inherit;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-style: dashed;
+}
+.gu-rose { color: var(--sos-rose1, #ffbbad); }
+.gu-vert { color: var(--sos-green, #47b21a); }
+.gu-jaune { color: var(--sos-yellow, #ffd400); }
+.gu-texte { flex: 1; }
+.titre-para-gu h5 { margin-bottom: 5px; }
+
+/* Point 5 : le lien admin « lancer l'agent IA » se distingue légèrement */
+.admine-part .link-admin[target="_blank"]::after { content: " ↗"; font-size: 9px; }
+
+/* Propositions IA (admin) : aperçu de la photo proposée par l'agent */
+.prop-photo-apercu img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid var(--black-100, #000);
+  margin-bottom: 4px;
+}

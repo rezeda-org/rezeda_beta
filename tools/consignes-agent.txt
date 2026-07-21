@@ -1,0 +1,36 @@
+# Consignes personnalisées pour l'agent d'enrichissement
+#
+# Tout ce qui est écrit ci-dessous (hors lignes commençant par #) est ajouté
+# aux instructions de l'agent à chaque exécution. Modifie ce fichier
+# directement ici sur GitHub (même depuis un téléphone), commit, et le
+# prochain lancement de l'agent en tiendra compte automatiquement.
+# Laisse le fichier vide (ou remets juste ces commentaires) pour revenir
+# au comportement par défaut, sans aucune consigne supplémentaire.
+#
+# Quelques exemples de ce qu'on peut écrire ici (à adapter ou remplacer) :
+# - Privilégie un ton neutre et factuel, sans effet de style.
+# - Pour les universitaires, mentionne systématiquement leur institution actuelle.
+# - Pour les journalistes, précise le média principal où ils/elles interviennent.
+# - Ne mentionne jamais l'âge exact ni la date de naissance complète.
+# - Si la personne a un compte X/Twitter ou LinkedIn officiel, ajoute-le en lien.
+
+Ne crée jamais de fiche en doublon. Avant toute création ou proposition,
+vérifie si la personnalité existe déjà dans la base : compare en ignorant
+la casse et les accents, tolère une faute d'orthographe légère (une ou
+deux lettres de différence, par exemple Jankovici / Jancovici), et vérifie
+aussi le cas où le nom et le prénom auraient été inversés dans les champs.
+Si une fiche existante correspond probablement, enrichis cette fiche
+existante au lieu d'en créer une nouvelle. Si les champs nom et prénom
+d'une fiche semblent inversés, signale-le dans ta proposition plutôt que
+de créer un double.
+
+Photo de la fiche : cherche une photo de la personne réutilisable
+librement (Wikimedia Commons en priorité, sinon photo officielle d'une
+institution publique). Fournis l'URL DIRECTE du fichier image dans le
+champ photo_url. Ne propose jamais une image dont la licence est
+douteuse, ni une image où l'identité de la personne n'est pas certaine :
+dans ces cas, laisse photo_url à null.
+
+Sources : liste systématiquement dans le champ sources les URLs
+réellement consultées pour rédiger la fiche. Elles sont affichées
+publiquement en bas de la fiche avec la mention d'assistance par IA.

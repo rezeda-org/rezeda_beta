@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <title>REZEDA, Composez votre gouvernement</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <!-- webflow-css-sync: la ligne suivante est mise à jour automatiquement -->
+  <link href="https://cdn.prod.website-files.com/68ecfda4d9b3270b98426ff5/css/sosgouv.webflow.shared.644157cc6.css" rel="stylesheet" type="text/css"/>
+  <link href="css/sosgouv.css?v46" rel="stylesheet" type="text/css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    if (window.WebFont) WebFont.load({ google: { families: ["Lato:400,700,900"] } });
+  </script>
+  <script type="text/javascript">
+    !function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);
+  </script>
+</head>
+<body>
+<div class="grid-layout">
+<div class="_3-cont-head">
+            <div id="w-node-aa9e0547-6ba9-5bad-a502-15b722d0c07d-98427085" class="bloclogo">
+                <a href="#" class="w-inline-block">
+                    <div class="logofont">REZEDA</div>
+                </a>
+                <div class="text-block-74">Composez votre gouvernement idéal </div>
+            </div>
+            <div id="w-node-c81e0f28-5e42-2d75-638a-3843b4fc30ea-98427085" class="_3-menu-2x-boutons">
+                <a href="#" class="_3-menou-bouton-compte user w-inline-block" id="btnCompte">
+                    <div class="fontello-picot-compte"></div>
+                    <div class="si-connect">
+                        <div class="connected-username">username</div>
+                    </div>
+                </a>
+                <div style="display:none" class="_3-menu-mon-compte" id="menuCompte" style="display:none">
+                    <a href="#" class="menu-link" id="openConnect">me connecter</a>
+                    <a href="#" class="menu-link" id="openInfosPerso">info. personelles</a>
+                    <a href="#" class="menu-link" id="openActivite">mon activité</a>
+                    <a href="#" class="menu-link menu-link-off">messagerie</a><a href="#" class="menu-link" id="btnLogoutMenu" style="display:none">me déconnecter</a>
+                </div>
+                <div style="display:none" class="_3-menu-general" id="menuGeneral" style="display:none">
+                    <a href="#" class="menu-link">FAQ</a>
+                    <a href="#" class="menu-link">contact</a>
+                </div>
+            </div>
+        </div>
+<div class="_3-cont-body">
+<div style="display:none" class="pm-parent connect" id="modal-connect">
+                    <div class="cont-flex-50-50">
+                        <a href="#" data-close-modal class="_3-close-bouton w-inline-block">
+                            <div class="croix"></div>
+                        </a>
+                        <div class="_3-small-modal-stroke">
+                            <div class="_3-petit-modal-content">
+                                <div class="_3-small-content-gap-10">
+                                    <div class="_w-connect-bloc creation">
+                                        <h1>Me connecter…</h1>
+                                        <div class="_3-esp-v-10"></div>
+                                        <div class="_3-form-bloc w-form">
+                                            <form id="email-form-13" name="email-form-13" data-name="Email Form 13" method="get" class="_3-form-gap-10" data-wf-page-id="68ecfda5d9b3270b98427085" data-wf-element-id="48b7b680-b96d-5e09-bc1a-6c4bac22cf5b" data-turnstile-sitekey="0x4AAAAAAAQTptj2So4dx43e">
+                                                <input class="mon-input5 w-input" maxlength="256" name="name-5" data-name="Name 5" placeholder="nom d&#x27;utilisateur" type="text" id="loginUsername"/>
+                                                <input class="mon-input5 w-input" maxlength="256" name="name-5" data-name="Name 5" placeholder="mot de passe" type="password" id="loginPassword"/>
+                                                <a href="#" id="btnLogin" class="_w-link-bloc-button publier w-inline-block">
+                                                    <div>je me connecte</div>
+                                                </a>
+                                            </form>
+                                            <div class="w-form-done">
+                                                <div>Thank you! Your submission has been received!</div>
+                                            </div>
+                                            <div class="w-form-fail">
+                                                <div>Oops! Something went wrong while submitting the form.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="espace-stroke"></div>
+                                    <div class="_w-connect-bloc creation">
+                                        <h1>…ou créer un compte</h1>
+                                        <div class="_3-esp-v-10"></div>
+                                        <div class="_3-form-bloc w-form">
+                                            <form id="email-form-13" name="email-form-13" data-name="Email Form 13" method="get" class="_3-form-gap-10" data-wf-page-id="68ecfda5d9b3270b98427085" data-wf-element-id="4f8bffd7-be57-e51e-729c-c57a316a268f" data-turnstile-sitekey="0x4AAAAAAAQTptj2So4dx43e">
+                                                <input class="mon-input5 w-input" maxlength="256" name="name-5" data-name="Name 5" placeholder="nom d&#x27;utilisateur" type="text" id="signupUsername"/>
+                                                <input class="mon-input5 w-input" maxlength="256" name="name-5" data-name="Name 5" placeholder="mot de passe" type="password" id="signupPassword"/>
+                                                <input class="mon-input5 w-input" maxlength="256" name="name-5" data-name="Name 5" placeholder="mot de passe" type="email" id="signupEmail"/>
+                                                <div class="_w-courant">* Sans email, pas de possibilité de notifications ni de récupération de mot de passe.</div>
+                                                <div class="w-form-formrecaptcha g-recaptcha g-recaptcha-error g-recaptcha-disabled g-recaptcha-invalid-key"></div>
+                                                <a href="#" id="btnSignup" class="_w-link-bloc-button publier w-inline-block">
+                                                    <div>je me connecte</div>
+                                                </a>
+                                            </form>
+                                            <div class="w-form-done">
+                                                <div>Thank you! Your submission has been received!</div>
+                                            </div>
+                                            <div class="w-form-fail">
+                                                <div>Oops! Something went wrong while submitting the form.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="_3-fond-modal"></div>
+                    </div>
+                </div>
+<div class="bm-parent donn-es-perso" id="modal-infos" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke">
+      <div class="esp-perso-content">
+        <div class="_3-content-fiche-perso">
+          <h1>Données personnelles</h1>
+          <div class="div-activit">
+            <div class="div-block-328">
+              <input class="mon-input2 w-input" maxlength="256" placeholder="nom d&#x27;utilisateur*" type="text" id="diUsername"/>
+              <input class="mon-input2 w-input" maxlength="256" placeholder="mot de passe*" type="text" id="diPassword"/>
+              <label class="w-checkbox _w-checkbox">
+                <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox w--redirected-checked" id="diAffVisu"></div>
+                <input type="checkbox" id="diAffUser" checked style="opacity:0;position:absolute;z-index:-1"/>
+                <span class="checkbox-label-2 w-form-label">Afficher mon nom d&#x27;utilisateur sur le site plutôt que mon Prénom + Nom</span>
+              </label>
+              <input class="mon-input2 w-input" maxlength="256" placeholder="nom" type="text" id="infoNom"/>
+              <input class="mon-input2 w-input" maxlength="256" placeholder="prénom" type="text" id="infoPrenom"/>
+              <input class="mon-input2 w-input" maxlength="256" placeholder="email" type="email" id="infoEmail"/>
+            </div>
+            <div class="bloc-bouton"><div class="_2-bt">
+              <a href="#" class="_w-link-bloc-button w-inline-block" data-close-modal><div class="_2-picto-fontello-bouton">&#xe822;</div><h6><strong class="heading-bold-text">annuler</strong></h6></a>
+              <a href="#" id="btnSaveInfos" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe81b;</div><h6><strong class="heading-bold-text">Enregistrer</strong></h6></a>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bm-parent activit" id="modal-activite" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke">
+      <div class="esp-perso-content">
+        <div class="_3-content-fiche-perso">
+          <h1>mon Activité</h1>
+          <div class="div-block-333"><h5 class="heading-36">GOUVERNEMENT</h5></div>
+          <div class="div-activit"><div class="text-block-76">Mes gouvernements publiés</div><div id="esp-publies"></div></div>
+          <div class="div-activit"><div class="text-block-76">Mes Brouillons</div><div id="esp-brouillons"></div></div>
+          <div class="div-activit"><div class="text-block-76">Mes gouvernement épinglés</div><div id="esp-epingles-gouv"></div></div>
+          <div class="div-activit"><div class="text-block-76">Mes votes</div><div id="esp-votes"></div></div>
+          <div class="div-activit"><div class="text-block-76">Mes commentaires</div><div id="esp-commentaires"></div></div>
+          <div class="div-activit"><div class="text-block-76">Mes secteurs et sous-secteurs</div><div id="esp-personnalisations"></div></div>
+          <div class="div-block-333"><h5 class="heading-36">personalités</h5></div>
+          <div class="div-activit"><div class="text-block-76">Personnalités Likées</div><div id="esp-likes"></div></div>
+          <div class="div-activit"><div class="text-block-76">Personnalités épinglées</div><div id="esp-epingles-perso"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bm-parent" id="modal-admin-membres" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke">
+      <h1>Membres</h1>
+      <div id="admin-membres-liste"><div class="loading">Chargement…</div></div>
+    </div>
+  </div>
+</div>
+<div class="bm-parent" id="modal-propositions-ia" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke">
+      <h1>Propositions de l&#x27;agent d&#x27;enrichissement</h1>
+      <p class="fiche-para">Chaque proposition provient d&#x27;une recherche automatique. Vérifiez avant de valider, en particulier les biographies et positionnements.</p>
+      <div id="propositions-ia-liste"><div class="loading">Chargement…</div></div>
+    </div>
+  </div>
+</div>
+<div class="bm-parent" id="modal-admin-secteurs" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke">
+      <h1>Secteurs et sous-secteurs par défaut</h1>
+      <p class="fiche-para">Les sous-secteurs listés ici sont associés par défaut à chaque ministère dans le composer.</p>
+      <div id="admin-secteurs-liste"><div class="loading">Chargement…</div></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="pm-parent definir-delegu" id="modal-delegue" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" data-close-modal class="_3-close-bouton w-inline-block"><div class="croix">&#xe822;</div></a>
+    <div class="_3-small-modal-stroke">
+      <div class="_3-petit-modal-content">
+        <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">delégué ministériel</h1></div>
+        <div class="_3-small-content-gap-10">
+          <div class="bloc-gris-2">
+            <div class="_3-title-bloc-padd-10-left white"><div class="_w-courant">Sélectionner le ministère auquel est rattaché le délégué ministériel:</div></div>
+            <div class="text-block-73">délégué ministériel auprès du ministère de […],</div>
+            <div class="grid-collection-list" id="mdMinisteres"></div>
+          </div>
+          <div class="bloc-gris-2">
+            <div class="_3-title-bloc-padd-10-left white"><div class="_w-courant">En option, associez un sous-secteur:</div></div>
+            <select id="mdSousSecteur" class="mon-inputdrop w-select"><option value="" selected>aucun sous-secteur</option></select>
+            <div class="_w-courant">Ou créez un sous-secteur:</div>
+            <textarea placeholder="nom du sous-secteur" maxlength="120" class="mon-input2 gras w-input" id="mdSousNouveau"></textarea>
+          </div>
+          <div class="bloc-gris-2">
+            <div class="_3-title-bloc-padd-10-left white"><div class="_w-courant">Et définissez sa fonction</div></div>
+            <textarea class="mon-input4 w-input" id="mdFonction" placeholder="(EN CHARGE DE…)" rows="3"></textarea>
+          </div>
+          <div class="pubis-utons"><div class="flex---gap-10">
+            <a href="#" id="mdValider" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe821;</div><h6><strong class="heading-bold-text">valider</strong></h6></a>
+          </div></div>
+        </div>
+      </div>
+    </div>
+    <div class="_3-fond-modal"></div>
+  </div>
+</div>
+
+
+
+<div class="pm-parent ajouter-personnalit" id="modal-add-perso" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" data-close-modal class="_3-close-bouton w-inline-block"><div class="croix">&#xe822;</div></a>
+    <div class="_3-small-modal-stroke">
+      <div class="_3-petit-modal-content">
+        <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">ajouter une personnalité</h1></div>
+        <div class="_3-small-content-gap-10">
+          <p>Remplissez les champs pour ajouter la personnalité à la base de données. La fiche sera ensuite enrichie par les équipes de SOSGOUV.</p>
+          <div class="_3-champs-texte">
+            <input class="mon-input3 w-input" maxlength="256" placeholder="nom*" type="text" id="mapNom"/>
+            <input class="mon-input3 w-input" maxlength="256" placeholder="prénom*" type="text" id="mapPrenom"/>
+            <input class="mon-input5 w-input" maxlength="256" placeholder="Métier" type="text" id="mapMetier"/>
+            <input class="mon-input5 w-input" maxlength="512" placeholder="lien fiche wikipedia" type="text" id="mapWiki"/>
+            <div id="mapVideoRows">
+              <div class="div-block-332">
+                <input class="mon-input5 w-input map-video-input" maxlength="512" placeholder="lien video" type="text" id="mapVideo"/>
+                <a href="#" class="_w-link-bloc-button-square w-inline-block" id="mapAddVideo" title="Ajouter un autre lien vidéo"><div class="_2-picto-fontello-bouton">&#xe823;</div></a>
+              </div>
+            </div>
+            <div id="mapLienRows">
+              <div class="div-block-332">
+                <input class="mon-input5 w-input map-lien-input" maxlength="512" placeholder="lien internet" type="text" id="mapDoc"/>
+                <a href="#" class="_w-link-bloc-button-square w-inline-block" id="mapAddLien" title="Ajouter un autre lien internet"><div class="_2-picto-fontello-bouton">&#xe823;</div></a>
+              </div>
+            </div>
+          </div>
+          <div class="pubis-utons"><div class="flex---gap-10"><a href="#" id="mapAjouter" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe891;</div><h6><strong class="heading-bold-text">ajouter</strong></h6></a></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="_3-fond-modal" data-close-modal></div>
+  </div>
+</div>
+<div class="pm-parent liste-personnalit" id="modal-liste-perso" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" data-close-modal class="_3-close-bouton w-inline-block"><div class="croix">&#xe822;</div></a>
+    <div class="_3-small-modal-stroke">
+      <div class="_3-petit-modal-content">
+        <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">Liste de personalité</h1></div>
+        <div class="_3-small-content-gap-10">
+          <p>Sélectionnez la personnalité à ajouter à ce poste</p>
+          <div data-delay="0" data-hover="false" class="_2-drops-down-new w-dropdown">
+            <div class="_w-dropdown-copy w-dropdown-toggle" id="mlpOrdreToggle">
+              <div class="_2-picto-fontello-bouton">&#xe825;</div>
+              <h6><strong class="heading-bold-text" id="mlpOrdreLabel">Par ordre alphabétique</strong></h6>
+            </div>
+            <nav class="dropdown-list-4 w-dropdown-list" id="mlpOrdreList">
+              <a href="#" data-mlp-ordre="alpha" class="_w-dropdown-left w-dropdown-link">par ordre alphabétique</a>
+              <a href="#" data-mlp-ordre="metier" class="_w-dropdown-left w-dropdown-link">par métiers</a>
+            </nav>
+          </div>
+          <div id="mlpListe" class="mlp-liste"></div>
+        </div>
+      </div>
+    </div>
+    <div class="_3-fond-modal" data-close-modal></div>
+  </div>
+</div>
+<div class="pm-parent ajouter-ministere" id="modal-ministere" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" data-close-modal class="_3-close-bouton w-inline-block"><div class="croix">&#xe822;</div></a>
+    <div class="_3-small-modal-stroke">
+      <div class="_3-petit-modal-content">
+        <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">ajouter ministére</h1></div>
+        <div class="_3-small-content-gap-10">
+          <p>Sélectionnez un ou plusieurs secteurs à ajouter à votre gouvernement.</p>
+          <div class="collection-list-wrapper-2 w-dyn-list">
+            <div role="list" class="grid-collection-list w-dyn-items" id="mmSecteurs"></div>
+          </div>
+          <p>Ou créez un secteur personalisé</p>
+          <textarea placeholder="nom du secteur" maxlength="120" class="mon-input2 gras w-input" id="mmManuel"></textarea>
+          <p>Définissez l&#x27;intitulé</p>
+          <textarea placeholder="ministère de…" maxlength="120" class="mon-input2 gras w-input" id="mmManuelIntitule"></textarea>
+          <div class="pubis-utons"><div class="flex---gap-10"><a href="#" id="mmValider" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe821;</div><h6><strong class="heading-bold-text">valider</strong></h6></a></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="_3-fond-modal" data-close-modal></div>
+  </div>
+</div>
+<div class="pm-parent choisir-secteur" id="modal-choisir-secteur" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" data-close-modal class="_3-close-bouton w-inline-block"><div class="croix">&#xe822;</div></a>
+    <div class="_3-small-modal-stroke">
+      <div class="_3-petit-modal-content">
+        <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">secteurs ministériel</h1></div>
+        <div class="_3-small-content-gap-10">
+          <p>Sélectionnez un ou plusieurs secteurs à associer au ministère.</p>
+          <div class="collection-list-wrapper-2 w-dyn-list">
+            <div role="list" class="grid-collection-list w-dyn-items" id="mcsSecteurs"></div>
+          </div>
+          <p>Ou créez un secteur personalisé</p>
+          <textarea placeholder="nom du secteur" maxlength="120" class="mon-input2 gras w-input" id="mcsManuel"></textarea>
+          <div class="pubis-utons"><div class="flex---gap-10"><a href="#" id="mcsValider" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe821;</div><h6><strong class="heading-bold-text">valider</strong></h6></a></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="_3-fond-modal" data-close-modal></div>
+  </div>
+</div>
+<div class="pm-parent choisir-sous-secteur" id="modal-sous-secteurs" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" data-close-modal class="_3-close-bouton w-inline-block"><div class="croix">&#xe822;</div></a>
+    <div class="_3-small-modal-stroke">
+      <div class="_3-petit-modal-content">
+        <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">sous-secteurs ministériel</h1></div>
+        <div class="_3-small-content-gap-10">
+          <p>Sélectionnez un ou plusieurs sous-secteurs à associer au ministère ou cherchez dans le champ de texte ci-dessous</p>
+          <input class="mon-input5 w-input" maxlength="120" placeholder="rechercher un sous-secteur…" type="text" id="ssRecherche" autocomplete="off"/>
+          <div class="collection-list-wrapper-2 w-dyn-list">
+            <div role="list" class="grid-collection-list w-dyn-items" id="sous-secteurs-contenu"></div>
+          </div>
+          <p>Ou créez un sous-secteur:</p>
+          <textarea placeholder="nom du sous-secteur" maxlength="120" class="mon-input2 gras w-input" id="ssNouveau"></textarea>
+          <div class="pubis-utons"><div class="flex---gap-10"><a href="#" id="btnCloseSous" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe821;</div><h6><strong class="heading-bold-text">valider</strong></h6></a></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="_3-fond-modal" data-close-modal></div>
+  </div>
+</div>
+<div class="pm-parent modifier-intitul" id="modal-intitule" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" data-close-modal class="_3-close-bouton w-inline-block"><div class="croix">&#xe822;</div></a>
+    <div class="_3-small-modal-stroke">
+      <div class="_3-petit-modal-content">
+        <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">personalisez l&#x27;intitulé du poste</h1></div>
+        <div class="_3-small-content-gap-10">
+          <p>Le secteur sera remplacé par votre intitulé personnalisé</p>
+          <input class="mon-input4 w-input" maxlength="256" placeholder="ministre de…" type="text" id="miInput"/>
+          <div class="pubis-utons"><div class="flex---gap-10"><a href="#" id="miValider" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe821;</div><h6><strong class="heading-bold-text">valider</strong></h6></a></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="_3-fond-modal" data-close-modal></div>
+  </div>
+</div>
+<div class="pm-parent connecter-vous" id="modal-connect-required" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" data-close-modal class="_3-close-bouton w-inline-block"><div class="croix">&#xe822;</div></a>
+    <div class="_3-small-modal-stroke">
+      <div class="_3-petit-modal-content">
+        <div class="_3-small-content-gap-10">
+          <p>Vous devez etre connecté pour utiliser cette fonctionalité.</p>
+          <div class="pubis-utons"><div class="flex---gap-10"><a href="#" id="btnConnectFromRequired" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe81f;</div><h6><strong class="heading-bold-text">me connecter</strong></h6></a></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="_3-fond-modal" data-close-modal></div>
+  </div>
+</div>
+
+<div class="bm-parent gu" id="modal-gu" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke">
+      <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">guide utilisateur</h1></div>
+      <div class="_4-content-gm">
+      <div class="bloc-gu">
+        <p class="fiche-para">REZEDA permet de composer des gouvernements imaginaires à partir d'une base de personnalités, de les publier, de les noter, de les commenter et de les partager. Chaque fonctionnalité est rappelée ci-dessous avec le bouton ou le lien qui la déclenche.</p>
+        <div class="titre-para-gu">
+          <h5>1. Composer un gouvernement</h5>
+<div class="gu-ligne"><div class="gu-icone">&#xe801;</div><div class="gu-texte">la loupe ouvre la liste complète des personnalités pour pourvoir le poste.</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe81f;</div><div class="gu-texte">le bouton jaune crée une nouvelle personnalité et l'affecte directement au poste.</div></div>
+<div class="gu-ligne"><div class="gu-icone gu-lien">modifier</div><div class="gu-texte">choisit les sous-secteurs du ministère, ou associe plusieurs secteurs à un même poste (fusion).</div></div>
+<div class="gu-ligne"><div class="gu-icone gu-lien">compléter</div><div class="gu-texte">complète l'intitulé d'un ministère régalien (sauf le 1er ministre).</div></div>
+<div class="gu-ligne"><div class="gu-icone"><span class="gu-rose">&#xe822;</span></div><div class="gu-texte">la croix rose retire un ministère non régalien.</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe823;</div><div class="gu-texte">« Ajouter ministère » : réintègre des secteurs retirés ou crée un ministère à l'intitulé libre.</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe839;</div><div class="gu-texte">« Ajouter délégué ministériel » : délégué rattaché à un ministère, avec sa fonction « en charge de… ».</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xf068;</div><div class="gu-texte">« Brouillon » enregistre votre travail sans le publier ; il se retrouve dans Mon activité.</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe891;</div><div class="gu-texte">« Publier » rend le gouvernement visible de tous (nom du gouvernement et postes régaliens obligatoires).</div></div>
+        </div>
+        <div class="titre-para-gu">
+          <h5>2. Gouvernements publiés</h5>
+<div class="gu-ligne"><div class="gu-icone gu-lien">trier par</div><div class="gu-texte">le menu déroulant trie par note, votes, popularité ou date ; la coche « prêts à gouverner » filtre les gouvernements complets dont tous les membres ont le statut ok.</div></div>
+<div class="gu-ligne"><div class="gu-icone">1&#8239;2&#8239;3&#8239;4&#8239;5</div><div class="gu-texte">les pastilles attribuent votre note de 1 à 5 (re-vote possible, sans doublon).</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe806;</div><div class="gu-texte">l'étoile jaune affiche la note moyenne du gouvernement.</div></div>
+<div class="gu-ligne"><div class="gu-icone gu-lien">détails</div><div class="gu-texte">ouvre la vue complète : notation par étoiles, composition par catégorie, commentaires.</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe896;</div><div class="gu-texte">commente le gouvernement et répond aux commentaires des autres.</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe835;</div><div class="gu-texte">l'enveloppe compose un email prêt à envoyer avec toute la composition et le lien du site.</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe80a;</div><div class="gu-texte">l'épingle enregistre le gouvernement dans votre activité.</div></div>
+<div class="gu-ligne"><div class="gu-icone gu-lien">un membre</div><div class="gu-texte">un clic sur le nom d'un membre ouvre sa fiche personnalité.</div></div>
+        </div>
+        <div class="titre-para-gu">
+          <h5>3. Ajouter une personnalité</h5>
+<div class="gu-ligne"><div class="gu-icone gu-lien">formulaire</div><div class="gu-texte">nom et prénom obligatoires ; métier et lien Wikipédia en option. La fiche est ensuite enrichie par les équipes REZEDA (IA + validation humaine).</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe891;</div><div class="gu-texte">« Ajouter » crée la fiche après un contrôle anti-doublon (casse, accents, fautes légères, inversion nom/prénom).</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe81f;</div><div class="gu-texte">depuis le composer, le bouton jaune de chaque poste ouvre le même formulaire et affecte la personnalité créée au poste.</div></div>
+        </div>
+        <div class="titre-para-gu">
+          <h5>4. Liste des personnalités</h5>
+<div class="gu-ligne"><div class="gu-icone gu-lien">trier par</div><div class="gu-texte">regroupe par lettre alphabétique ou par métier ; un second menu filtre par statut.</div></div>
+<div class="gu-ligne"><div class="gu-icone"><span class="gu-vert">&#xe821;</span> <span class="gu-jaune">&#xe844;</span> &#xe822;</div><div class="gu-texte">le statut : coche verte « ok », points jaunes « sous condition », croix « jamais », rien quand la position n'est pas connue.</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe808;</div><div class="gu-texte">le cœur like la personnalité (le compteur affiche le total).</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe80a;</div><div class="gu-texte">l'épingle l'enregistre dans votre activité.</div></div>
+<div class="gu-ligne"><div class="gu-icone">&#xe89d;</div><div class="gu-texte">le bouton brouillon l'ajoute à l'un de vos brouillons enregistrés, au poste de votre choix.</div></div>
+<div class="gu-ligne"><div class="gu-icone gu-lien">le nom</div><div class="gu-texte">un clic ouvre la fiche complète : photo, biographie, expertises, engagements, postes proposés, médias et sources.</div></div>
+        </div>
+        <div class="titre-para-gu">
+          <h5>5. Mon activité</h5>
+<div class="gu-ligne"><div class="gu-icone gu-lien">menu compte</div><div class="gu-texte">en haut à droite, le bouton compte ouvre le menu : connexion, info. personnelles, mon activité.</div></div>
+<div class="gu-ligne"><div class="gu-icone gu-lien">mon activité</div><div class="gu-texte">rassemble tout ce que vous avez fait : brouillons en cours, votes, commentaires, personnalités et gouvernements likés ou épinglés. Chaque élément est cliquable et ramène au contenu concerné.</div></div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bm-parent faq" id="modal-faq" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke">
+      <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">Foire aux questions</h1></div>
+      <div class="_4-content-gm">
+        <div class="form-block-12 w-form">
+          <div class="_3-form-gap-10">
+            <textarea placeholder="posez votre question" maxlength="5000" id="faqQuestion" class="mon-input2 w-input"></textarea>
+            <input class="mon-input2 w-input" maxlength="256" placeholder="votre email" type="text" id="faqEmail"/>
+            <a href="#" id="faqEnvoyer" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe800;</div><h6><strong class="heading-bold-text">Envoyer</strong></h6></a>
+          </div>
+        </div>
+        <div class="bloc-questions">
+          <div class="q-r-bloc">
+            <a href="#" class="question w-inline-block"><h3>Faut-il un compte pour consulter le site ?</h3></a>
+            <div style="display:none" class="reponses"><p class="paragraph-12-normal">Non. Les gouvernements publiés et la liste des personnalités sont consultables librement. La connexion est nécessaire pour composer, publier, voter, commenter, liker et ajouter des personnalités.</p></div>
+          </div>
+          <div class="q-r-bloc">
+            <a href="#" class="question w-inline-block"><h3>Comment publier un gouvernement ?</h3></a>
+            <div style="display:none" class="reponses"><p class="paragraph-12-normal">Depuis « composer un gouvernement » : donnez un nom à votre gouvernement, pourvoyez les six postes régaliens (signalés par un astérisque), puis cliquez « Publier ». « Brouillon » enregistre votre travail pour le reprendre plus tard depuis Mon activité.</p></div>
+          </div>
+          <div class="q-r-bloc">
+            <a href="#" class="question w-inline-block"><h3>Qui rédige les fiches des personnalités ?</h3></a>
+            <div style="display:none" class="reponses"><p class="paragraph-12-normal">Les fiches sont rédigées avec l'assistance d'une IA à partir de sources publiques listées en bas de chaque fiche, puis validées par un administrateur. Si une information vous semble fausse ou incomplète, signalez-la à l'administrateur du site : etienneneville@gmail.com.</p></div>
+          </div>
+          <div class="q-r-bloc">
+            <a href="#" class="question w-inline-block"><h3>Puis-je supprimer une personnalité que j'ai ajoutée ?</h3></a>
+            <div style="display:none" class="reponses"><p class="paragraph-12-normal">Oui, tant qu'elle ne figure dans aucun gouvernement publié. Le bouton corbeille apparaît sur ses cartes dans la liste des personnalités.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bm-parent medias" id="modal-medias" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke">
+      <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">Médias</h1></div>
+      <div class="_4-content-gm">
+        <p class="fiche-para">Toutes les vidéos publiées dans les fiches des personnalités, sur une seule page.</p>
+        <div class="bloc-video medias-page" id="medias-contenu"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bm-parent" id="modal-detail" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke"><div class="_4-content-gm" id="detail-contenu"></div></div>
+  </div>
+</div>
+<div class="bm-parent" id="modal-fiche" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-big-modal-stroke"><div class="_3-content-fiche-perso" id="fiche-contenu"></div></div>
+  </div>
+</div>
+<div class="pm-parent" id="modal-admin-perso" style="display:none">
+  <div class="cont-flex-50-50">
+    <a href="#" class="_3-close-bouton w-inline-block" data-close-modal><div class="croix">&#xe822;</div></a>
+    <div class="_3-small-modal-stroke"><div class="_3-petit-modal-content">
+      <h1>Modifier la personnalité</h1>
+      <div class="_3-form-gap-10">
+        <input class="mon-input5 w-input" type="text" id="admNom" placeholder="nom"/>
+        <input class="mon-input5 w-input" type="text" id="admPrenom" placeholder="prénom"/>
+        <input class="mon-input5 w-input" type="text" id="admMetiers" placeholder="métiers (séparés par des virgules)"/>
+        <input class="mon-input5 w-input" type="text" id="admPhoto" placeholder="photo (URL directe d&#x27;une image)"/>
+        <textarea class="mon-input5 w-input" id="admShortBio" placeholder="biographie courte" rows="2"></textarea>
+        <textarea class="mon-input5 w-input" id="admBio" placeholder="biographie complète" rows="4"></textarea>
+        <select id="admStatut" class="_5-selecta mon-inputdrop w-select">
+          <option value="0">néant</option><option value="1">jamais</option>
+          <option value="2">sous condition</option><option value="3">ok</option>
+        </select>
+        <div class="adm-liens-bloc">
+          <h4>Documents en ligne (liens, vidéos)</h4>
+          <div id="admLiensListe"></div>
+          <div class="adm-liens-form">
+            <select id="admLienType" class="_5-selecta mon-inputdrop w-select">
+              <option value="lien">Lien internet</option><option value="video">Vidéo</option>
+            </select>
+            <input class="mon-input5 w-input" type="text" id="admLienTitre" placeholder="titre du document"/>
+            <input class="mon-input5 w-input" type="text" id="admLienUrl" placeholder="URL (https://…)"/>
+            <a href="#" id="admLienAddBtn" class="_w-link-bloc-button bbrouillon w-inline-block"><div>ajouter ce document</div></a>
+          </div>
+        </div>
+        <a href="#" id="admSaveBtn" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe81b;</div><div>enregistrer</div></a>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<div class="_3-cont-page-menu"><div class="_3-menu-wrap"><div class="_3-menu">
+                    <a href="#" data-section="1" class="_2-menu-bouton w-inline-block">
+                        <h1 class="heading-32">gouvernements publiés</h1>
+                    </a>
+                    <a href="#" data-section="2" class="_2-menu-bouton w-inline-block">
+                        <h1 class="heading-33">composer un gouvernement</h1>
+                    </a>
+                    <a href="#" data-section="3" class="_2-mini-bouton people menu w-inline-block" data-bulle="ajouter une personnalité">
+                        <div class="_2-picto-fontello-bouton menu">&#xe81f;</div>
+                        <div class="_2-picto-fontello-bouton menu mini">&#xe823;</div>
+                    </a>
+                    <a href="#" data-section="4" class="_2-mini-bouton people menu w-inline-block" data-bulle="liste des personnalités">
+                        <div class="_2-picto-fontello-bouton menu">&#xe84e;</div>
+                    </a>
+                </div></div>
+<div class="_3-0_sous-menu-content-0" id="section-0">
+                    <div class="content-a-propos">
+                        <p class="paragraph-6">
+                            Ajoutez à la base de donnée 
+                            <br/>
+                            des personnalités qui vous inspirent.
+                            <br/>
+                        </p>
+                        <div class="filet"></div>
+                        <p class="paragraph-6">
+                            Utilisez cette base de données 
+                            <br/>
+                            pour composer votre gouvernement.
+                            <br/>
+                        </p>
+                        <div class="filet"></div>
+                        <p class="paragraph-6">
+                            Publiez votre gouvernements 
+                            <br/>
+                            pour le présentez aux autres utilisateurs.
+                            <br/>
+                        </p>
+                    </div>
+                </div>
+<div class="_3-1_sous-menu-content-1" id="section-1" style="display:none">
+                    <div class="_3-select-bloc">
+                        <div data-delay="0" data-hover="false" class="_2-drops-down-new w-dropdown">
+                            <div class="_w-dropdown-copy w-dropdown-toggle" id="triGouvToggle">
+                                <div class="_2-picto-fontello-bouton"></div>
+                                <h6>
+                                    <strong class="heading-bold-text" id="triGouvLabel">Les mieux notés</strong>
+                                </h6>
+                            </div>
+                            <nav class="dropdown-list-4 w-dropdown-list" id="triGouvList">
+                                <a href="#" data-tri="note" class="_w-dropdown-left w-dropdown-link">Meilleures notes globales</a>
+                                <a href="#" data-tri="votes" class="_w-dropdown-left w-dropdown-link">Les plus notés</a>
+                                <a href="#" data-tri="popularite" class="_w-dropdown-left w-dropdown-link">Popularité (additions des likes des membres)</a>
+                                <a href="#" data-tri="date" class="_w-dropdown-left w-dropdown-link">Date d&#x27;ajout</a>
+                            </nav>
+                        </div>
+                        <div class="form-checkbox w-form">
+                            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="68ecfda5d9b3270b98427085" data-wf-element-id="fc012a34-ee25-bfc4-8e49-562c5f1d8ee7" data-turnstile-sitekey="0x4AAAAAAAQTptj2So4dx43e">
+                                <label class="w-checkbox _w-checkbox">
+                                    <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox"></div>
+                                    <input type="checkbox" name="checkbox" id="filtrePret" data-name="Checkbox" style="opacity:0;position:absolute;z-index:-1"/>
+                                    <span class="checkbox-label-2 w-form-label" for="checkbox">
+                                        prêt à gouverner 
+                                        <code class="code-12"></code>
+                                    </span>
+                                </label>
+                            </form>
+                            <div class="w-form-done">
+                                <div>Thank you! Your submission has been received!</div>
+                            </div>
+                            <div class="w-form-fail">
+                                <div>Oops! Something went wrong while submitting the form.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_3-gov-content" id="liste-gouvernements"></div>
+                    <div class="_3-gov-content x">
+                        
+                    </div>
+                </div>
+<div class="_3-2_sous-menu-content-2" id="section-2" style="display:none">
+  <div class="content-gm-compo-gov">
+    <div class="bloc-v-gap10">
+      <input class="mon-input w-input" maxlength="120" placeholder="nom du gouvernement*" type="text" id="gouvTitre"/>
+      <textarea class="mon-input2 w-input" maxlength="5000" placeholder="Vision de l&#x27;auteur" id="gouvDescription"></textarea>
+    </div>
+    <div class="bloc-title"><h5 class="heading-10">Ministères Régaliens</h5></div>
+    <div class="_3-bloc-minsteres" id="composer-postes"></div>
+    <div class="compo-section-desc">
+      <div class="_w-courant grey-courant compo-desc-txt"><strong>MINISTÈRES NON RÉGALIENS :</strong> AJOUTEZ ET / OU FUSIONNEZ DES MINISTÈRES, CHANGEZ LES INTITULÉS POUR LES FAIRE CORRESPONDRE À VOTRE VISION</div>
+      <a href="#" id="btnAddMinistere" class="_w-link-bloc-button addpink w-inline-block"><div class="_2-picto-fontello-bouton white">&#xe823;</div><h6><strong class="heading-bold-text white">Ajouter ministère</strong></h6></a>
+    </div>
+    <div class="compo-section-desc">
+      <div class="_w-courant grey-courant compo-desc-txt"><strong>DÉLÉGUÉS MINISTÉRIEL :</strong> AJOUTEZ DES DÉLÉGUÉS, AFFILIEZ LES À UN MINISTÈRE ET CHARGEZ LES D&#x27;UNE FONCTION PARTICULIÈRE.</div>
+      <a href="#" id="btnAddDelegue" class="_w-link-bloc-button addpink w-inline-block"><div class="_2-picto-fontello-bouton white">&#xe839;</div><h6><strong class="heading-bold-text white">Ajouter délégué ministeriel</strong></h6></a>
+    </div>
+    <div class="pubis-utons">
+      <div class="flex---gap-10">
+        <a href="#" id="btnBrouillon" class="_w-link-bloc-button w-inline-block"><div class="_2-picto-fontello-bouton">&#xf068;</div><h6><strong class="heading-bold-text">sauvegarder brouillon</strong></h6></a>
+        <a href="#" id="btnPublier" class="_w-link-bloc-button publier w-inline-block"><h6><strong class="heading-bold-text">publier</strong></h6><div class="_2-picto-fontello-bouton">&#xe891;</div></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="_3-3_sous-menu-content-3" id="section-3" style="display:none">
+  <div class="_3-petit-modal-content">
+    <div class="_3-title-bloc-padd-10-left"><h1 class="heading-24">ajouter une personnalité</h1></div>
+    <div class="_3-small-content-gap-10">
+      <p>Remplissez les champs pour ajouter la personnalité à la base de données. La fiche sera ensuite enrichie par les équipes de SOSGOUV.</p>
+      <div class="_3-champs-texte">
+        <input class="mon-input3 w-input" maxlength="256" placeholder="nom*" type="text" id="pNom"/>
+        <input class="mon-input3 w-input" maxlength="256" placeholder="prénom*" type="text" id="pPrenom"/>
+        <input class="mon-input5 w-input" maxlength="256" placeholder="Métier" type="text" id="pMetier"/>
+        <input class="mon-input5 w-input" maxlength="512" placeholder="lien fiche wikipedia" type="text" id="pWiki"/>
+        <div id="pVideoRows">
+          <div class="div-block-332">
+            <input class="mon-input5 w-input map-video-input" maxlength="512" placeholder="lien video" type="text"/>
+            <a href="#" class="_w-link-bloc-button-square w-inline-block" id="pAddVideo" title="Ajouter un autre lien vidéo"><div class="_2-picto-fontello-bouton">&#xe823;</div></a>
+          </div>
+        </div>
+        <div id="pLienRows">
+          <div class="div-block-332">
+            <input class="mon-input5 w-input map-lien-input" maxlength="512" placeholder="lien internet" type="text"/>
+            <a href="#" class="_w-link-bloc-button-square w-inline-block" id="pAddLien" title="Ajouter un autre lien internet"><div class="_2-picto-fontello-bouton">&#xe823;</div></a>
+          </div>
+        </div>
+      </div>
+      <div class="pubis-utons"><div class="flex---gap-10">
+        <a href="#" id="pAjouter" class="_w-link-bloc-button publier w-inline-block"><div class="_2-picto-fontello-bouton">&#xe891;</div><h6><strong class="heading-bold-text">ajouter</strong></h6></a>
+      </div></div>
+    </div>
+  </div>
+</div>
+<div class="_3-4_sous-menu-content-4" id="section-4" style="display:none">
+                    <div class="_3-select-bloc">
+                        <div class="form-checkbox w-form">
+                            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="68ecfda5d9b3270b98427085" data-wf-element-id="d36ca319-087f-ee7a-ad88-a8c27fc73efe" data-turnstile-sitekey="0x4AAAAAAAQTptj2So4dx43e">
+                                <div class="_5-selecta drops-perso">
+  <div data-hover="false" data-delay="0" class="_2-drops-down-new w-dropdown">
+    <div class="_w-dropdown-copy w-dropdown-toggle" id="filtreStatutToggle">
+      <div class="_2-picto-fontello-bouton">&#xe825;</div>
+      <strong class="heading-bold-text" id="filtreStatutLabel">tous les statuts</strong>
+    </div>
+    <nav class="dropdown-list-4 w-dropdown-list" id="filtreStatutList">
+      <a href="#" data-statut="" class="_w-dropdown-left w-dropdown-link">tous les statuts</a>
+      <a href="#" data-statut="3" class="_w-dropdown-left w-dropdown-link">ok</a>
+      <a href="#" data-statut="2" class="_w-dropdown-left w-dropdown-link">sous condition</a>
+      <a href="#" data-statut="1" class="_w-dropdown-left w-dropdown-link">jamais</a>
+      <a href="#" data-statut="0" class="_w-dropdown-left w-dropdown-link">néant</a>
+    </nav>
+  </div>
+  <div data-hover="false" data-delay="0" class="_2-drops-down-new w-dropdown">
+    <div class="_w-dropdown-copy w-dropdown-toggle" id="ordreListeToggle">
+      <div class="_2-picto-fontello-bouton">&#xe825;</div>
+      <strong class="heading-bold-text" id="ordreListeLabel">ordre alphabétique</strong>
+    </div>
+    <nav class="dropdown-list-4 w-dropdown-list" id="ordreListeList">
+      <a href="#" data-ordre="alpha" class="_w-dropdown-left w-dropdown-link">ordre alphabétique</a>
+      <a href="#" data-ordre="metier" class="_w-dropdown-left w-dropdown-link">par métier</a>
+    </nav>
+  </div>
+</div>
+                            </form>
+                            <div class="w-form-done">
+                                <div>Thank you! Your submission has been received!</div>
+                            </div>
+                            <div class="w-form-fail">
+                                <div>Oops! Something went wrong while submitting the form.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div-block-290">
+                        
+                        <div id="liste-personnalites"></div></div></div>
+</div>
+<div class="_3-cont-foot">
+  <div class="admine-part" id="adminFooter" style="display:none">
+    <a href="#" data-section="4" class="link-admin">personnalités</a>
+    <a href="#" id="openAdminMembres" class="link-admin">membres</a>
+    <a href="#" id="openAdminSecteurs" class="link-admin">secteurs et sous-secteurs</a>
+    <a href="#" id="openPropositionsIA" class="link-admin">propositions IA <span id="badgePropositionsIA" class="badge-compteur" style="display:none">0</span></a>
+    <a href="https://github.com/rezeda-org/rezeda_beta/actions/workflows/agent-enrichissement.yml" target="_blank" rel="noopener" class="link-admin" data-bulle="Ouvre la page GitHub du workflow : bouton « Run workflow » pour lancer l'agent">lancer l'agent IA</a>
+  </div>
+  <div class="div-block-338 foot-public-liens">
+    <a href="#" id="openGuide" class="linkblack w-inline-block"><div>Guide utilisateur</div></a>
+    <a href="#" id="openFaq" class="linkblack w-inline-block"><div>Faq</div></a>
+    <a href="#" id="openMedias" class="linkblack w-inline-block"><div>Médias</div></a>
+  </div>
+</div>
+</div>
+</div>
+<div class="_3-fond-modal" id="fondModal" style="display:none"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js?v46"></script>
+<script src="js/auth.js?v46"></script>
+<script src="js/ui.js?v46"></script>
+<script src="js/personnalites.js?v46"></script>
+<script src="js/gouvernement.js?v46"></script>
+</body>
+</html>
