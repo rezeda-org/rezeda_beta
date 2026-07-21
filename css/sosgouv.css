@@ -665,13 +665,14 @@ body { scroll-padding-bottom: 50px; }
 #fiche-contenu .fiche-statut { white-space: nowrap; }
 #fiche-contenu .fiche-statut > div { white-space: nowrap; }
 #fiche-contenu .div-block-339 { flex-wrap: wrap; gap: 5px; }
-#fiche-contenu .bloc-video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
+/* le wrapper Webflow .w-video n'a de hauteur que via padding-top */
+#fiche-contenu .w-video { padding-top: 56.25% !important; }
 #fiche-contenu .bloc-links, #fiche-contenu .div-block-340 { display: flex; flex-direction: column; gap: 4px; }
 #fiche-contenu .div-block-340 a.liensimple { word-break: break-all; }
 
 /* Point 1 : page médias (toutes les vidéos des fiches) */
 #medias-contenu.bloc-video { margin-top: 10px; }
-#medias-contenu iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
+#medias-contenu .w-video { padding-top: 56.25% !important; }
 #medias-contenu .legendesimple a { color: inherit; text-decoration: underline; }
 
 /* Point 1 : FAQ, accordéon questions/réponses */
@@ -680,31 +681,52 @@ body { scroll-padding-bottom: 50px; }
 #modal-faq .reponses { padding: 4px 0 8px; }
 #modal-faq ._3-form-gap-10 { display: flex; flex-direction: column; gap: 7px; margin-bottom: 15px; }
 
-/* Point 2 : guide utilisateur, lignes fonction = picto + explication */
-.gu-ligne { display: flex; align-items: baseline; gap: 10px; margin: 4px 0; }
+/* Point 2 : guide utilisateur, chaque fonction montrée avec le VRAI
+   composant du site (boutons, pictos, liens code) en démonstration. */
+.gu-ligne { display: flex; align-items: center; gap: 14px; margin: 9px 0; }
 .gu-icone {
-  font-family: Fontello, Arial, sans-serif;
   flex: none;
-  min-width: 58px;
-  text-align: center;
-  font-size: 14px;
-  border: 2px solid var(--black-100, #000);
-  border-radius: 5px;
-  padding: 1px 6px;
-  white-space: nowrap;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none; /* composants de démonstration, non cliquables */
 }
-.gu-icone.gu-lien {
-  font-family: inherit;
-  font-size: 11px;
-  text-transform: uppercase;
-  font-weight: 700;
-  border-style: dashed;
+.gu-icone ._w-link-bloc-button { flex: none; }
+.gu-icone ._2-mini-bouton {
+  min-height: 22px;
+  min-width: 24px;
+  padding: 2px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.gu-rose { color: var(--sos-rose1, #ffbbad); }
-.gu-vert { color: var(--sos-green, #47b21a); }
-.gu-jaune { color: var(--sos-yellow, #ffd400); }
+/* le libellé des mini-boutons (détails…) est masqué par défaut dans la
+   maquette (.heading-dyn display:none), on le montre dans la démo */
+.gu-icone .heading-dyn { display: block; margin: 0; }
 .gu-texte { flex: 1; }
-.titre-para-gu h5 { margin-bottom: 5px; }
+.gu-intro {
+  color: var(--sos-new-grey, #999);
+  font-size: 11px;
+  margin: 0 0 8px;
+}
+.gu-etoile {
+  font-family: Fontello, Arial, sans-serif;
+  color: var(--sos-yellow, #ffd400);
+  font-size: 22px;
+  line-height: 1;
+}
+.gu-statut { font-size: 14px; margin-left: 0; }
+.gu-pastilles {
+  border: 1.5px solid var(--black-100, #000);
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+/* espacement net entre les parties du guide */
+.bloc-gu .titre-para-gu { margin-top: 30px; display: block; }
+.titre-para-gu h5 { margin-bottom: 2px; }
 
 /* Point 5 : le lien admin « lancer l'agent IA » se distingue légèrement */
 .admine-part .link-admin[target="_blank"]::after { content: " ↗"; font-size: 9px; }

@@ -162,6 +162,9 @@ const UI = {
         a.addEventListener('click', (e) => {
           e.preventDefault();
           if (window.Perso) {
+            // On referme d'abord la page médias : deux grands panneaux
+            // affichés en même temps s'empileraient dans le conteneur.
+            this.closeModals();
             if (!Perso.all.length) { Perso.loadList().then(() => Perso.openFiche(a.dataset.persoId)); }
             else Perso.openFiche(a.dataset.persoId);
           }

@@ -350,10 +350,10 @@ const Perso = {
                 </div>
               </div>
               ${p.short_bio ? '<p>' + this.esc(p.short_bio) + '</p>' : ''}
-              ${bioNarrative ? '<p>' + this.esc(bioNarrative) + '</p>' : ''}
             </div>
           </div>
         </div>
+        ${bioNarrative ? '<p>' + this.esc(bioNarrative) + '</p>' : ''}
         ${expertise ? titreSection('Domaines de recherche et expertise') + '<p>' + this.esc(expertise) + '</p>' : ''}
         ${engagements ? titreSection('Engagements et positionnements politiques') + '<p>' + this.esc(engagements) + '</p>' : ''}
         ${bioLibre ? '<p>' + this.esc(bioLibre) + '</p>' : ''}
